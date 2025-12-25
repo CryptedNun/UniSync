@@ -5,6 +5,7 @@ import RequestsActivities from "./pages/RequestsActivities";
 import Notices from "./pages/Notices";
 import MyReminders from "./pages/MyReminders";
 import MyTeams from "./pages/MyTeams";
+import AddReminder from "./pages/AddReminder";
 import "./App.css";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       {activePage === "notices" && <Notices setActivePage={setActivePage} />}
       {activePage === "reminders" && <MyReminders />}
       {activePage === "teams" && <MyTeams />}
+      {activePage === "add-reminder" && <AddReminder />}
     </div>
   );
 }

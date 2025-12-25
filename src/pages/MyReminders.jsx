@@ -7,6 +7,7 @@ function MyReminders() {
   return (
     <div className="dashboard">
       <h1>My Reminders</h1>
+      <button className="add-btn" onClick={() => setActivePage("add-reminder")}>+</button>
       <div className="cards">
         {dummyReminders.map((reminder) => (
           <div key={reminder.id} className="card">

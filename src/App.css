@@ -177,3 +177,25 @@
 .dashboard-back:hover {
   color: #0ea5e9;
 }
+
+.add-btn {
+  padding: 10px 18px;
+  background-color: #020617;   /* black */
+  color: #38bdf8;              /* cyan text */
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.add-btn:hover {
+  background-color: #1e293b;   /* dark hover */
+  border-color: #38bdf8;       /* cyan border */
+  transform: translateY(-3px);
+}
+
+
