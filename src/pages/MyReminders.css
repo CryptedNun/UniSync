@@ -1,0 +1,98 @@
+.reminders-page {
+  padding: 24px;
+  color: #e5e7eb;
+}
+
+.reminders-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.add-btn {
+  background: #1f2933;
+  color: #e5e7eb;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #374151;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+.empty-text {
+  color: #9ca3af;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #0f172a;
+  padding: 20px;
+  border-radius: 14px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal input,
+.modal textarea {
+  background: #020617;
+  border: 1px solid #1f2937;
+  color: #e5e7eb;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.day {
+  background: #1f2937;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.day.active {
+  background: #2563eb;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-actions button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-actions .primary {
+  background: #2563eb;
+  color: white;
+}
