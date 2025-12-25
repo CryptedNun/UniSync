@@ -21,9 +21,10 @@ function App() {
         <RequestsActivities currentUser={currentUser} setActivePage={setActivePage} />
       )}
       {activePage === "notices" && <Notices setActivePage={setActivePage} />}
-      {activePage === "reminders" && <MyReminders />}
+      {activePage === "reminders" && (<MyReminders setActivePage={setActivePage} />
+      )}
       {activePage === "teams" && <MyTeams />}
-      {activePage === "add-reminder" && <AddReminder />}
+      {activePage === "add-reminder" && <AddReminder setActivePage={setActivePage} />}
     </div>
   );
 }

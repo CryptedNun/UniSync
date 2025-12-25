@@ -52,11 +52,20 @@
   padding: 30px;
 }
 
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 .dashboard h1 {
   font-size: 28px;
   margin-bottom: 20px;
   color: #f8fafc;
 }
+
 
 /* Sections */
 .dashboard section {
@@ -179,11 +188,12 @@
 }
 
 .add-btn {
-  padding: 10px 18px;
-  background-color: #020617;   /* black */
-  color: #38bdf8;              /* cyan text */
+  padding: 12px 22px;          /* bigger hit area */
+  font-size: 15px;             /* slightly larger text */
+  background-color: #020617;
+  color: #38bdf8;
   border: 1px solid transparent;
-  border-radius: 10px;
+  border-radius: 12px;
   font-weight: bold;
   cursor: pointer;
   transition: 
@@ -193,9 +203,119 @@
 }
 
 .add-btn:hover {
-  background-color: #1e293b;   /* dark hover */
-  border-color: #38bdf8;       /* cyan border */
+  background-color: #1e293b;
+  border-color: #38bdf8;
   transform: translateY(-3px);
 }
 
+/* Add Reminder Page */
+.add-page {
+  max-width: 500px;
+  margin: 40px auto;
+  background-color: #020617;
+  padding: 30px 25px;
+  border-radius: 12px;
+  border: 1px solid #1e293b;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
 
+.add-page h1 {
+  font-size: 26px;
+  margin-bottom: 25px;
+  color: #38bdf8;
+  text-align: center;
+}
+
+.add-page label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #cbd5f5;
+}
+
+.add-page input[type="text"],
+.add-page input[type="time"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  border: 1px solid #1e293b;
+  background-color: #0f172a;
+  color: #e5e7eb;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-page input[type="text"]:focus,
+.add-page input[type="time"]:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 6px rgba(56,189,248,0.5);
+}
+
+.days {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+.day {
+  flex: 1;
+  min-width: 40px;
+  padding: 8px 0;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #1e293b;
+  background-color: #020617;
+  color: #cbd5f5;
+  cursor: pointer;
+  transition: 
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.day.active {
+  background-color: #38bdf8;
+  color: #020617;
+  border-color: #38bdf8;
+  font-weight: bold;
+}
+
+.day:hover {
+  background-color: #1e293b;
+  color: #38bdf8;
+  transform: translateY(-2px);
+}
+
+.save-btn {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #38bdf8;
+  color: #020617;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.save-btn:hover {
+  background-color: #0ea5e9;
+  transform: translateY(-2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .days {
+    gap: 5px;
+  }
+  .day {
+    min-width: 30px;
+    padding: 6px 0;
+    font-size: 12px;
+  }
+}

@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function AddReminder() {
-const navigate = useNavigate();
+
 const [title, setTitle] = useState("");
 const [time, setTime] = useState("");
 const [selectedDays, setSelectedDays] = useState([]);

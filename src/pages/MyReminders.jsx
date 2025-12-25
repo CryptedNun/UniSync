@@ -1,4 +1,5 @@
-function MyReminders() {
+function MyReminders({ setActivePage }) {
+
   const dummyReminders = [
     { id: 1, title: "Study Math", time: "6:00 PM", repeat: "Mon, Wed, Fri" },
     { id: 2, title: "Read CS Notes", time: "8:00 PM", repeat: "Daily" },
@@ -6,8 +7,10 @@ function MyReminders() {
 
   return (
     <div className="dashboard">
-      <h1>My Reminders</h1>
-      <button className="add-btn" onClick={() => setActivePage("add-reminder")}>+</button>
+      <div className="dashboard-header">
+        <h1>My Reminders</h1>
+        <button className="add-btn" onClick={() => setActivePage("add-reminder")}>+ Add</button>
+      </div>
       <div className="cards">
         {dummyReminders.map((reminder) => (
           <div key={reminder.id} className="card">
