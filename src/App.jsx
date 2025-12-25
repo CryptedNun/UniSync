@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
 import RequestsActivities from "./pages/RequestsActivities";
@@ -11,6 +11,31 @@ import "./App.css";
 function App() {
   const [activePage, setActivePage] = useState("dashboard");
   const currentUser = { id: 1, name: "Hasan" };
+  const [reminders, setReminders] = useState([]);
+
+  useEffect(() => {
+    const raw = localStorage.getItem("reminders");
+    if (raw) {
+      try {
+        setReminders(JSON.parse(raw));
+      } catch (e) {
+        console.error("Failed to parse reminders from localStorage", e);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("reminders", JSON.stringify(reminders));
+    } catch (e) {
+      console.error("Failed to save reminders", e);
+    }
+  }, [reminders]);
+
+  const addReminder = (reminder) => {
+    setReminders((prev) => [...prev, reminder]);
+    setActivePage("reminders");
+  };
 
   return (
     <div className="app">
@@ -21,10 +46,13 @@ function App() {
         <RequestsActivities currentUser={currentUser} setActivePage={setActivePage} />
       )}
       {activePage === "notices" && <Notices setActivePage={setActivePage} />}
-      {activePage === "reminders" && (<MyReminders setActivePage={setActivePage} />
+      {activePage === "reminders" && (
+        <MyReminders setActivePage={setActivePage} reminders={reminders} />
       )}
       {activePage === "teams" && <MyTeams />}
-      {activePage === "add-reminder" && <AddReminder setActivePage={setActivePage} />}
+      {activePage === "add-reminder" && (
+        <AddReminder setActivePage={setActivePage} addReminder={addReminder} />
+      )}
     </div>
   );
 }

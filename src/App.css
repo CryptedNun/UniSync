@@ -83,7 +83,7 @@
 /* Cards Grid */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, 1fr); /* two cards per row */
   gap: 20px;
 }
 
@@ -304,6 +304,33 @@
 }
 
 .save-btn:hover {
+  background-color: #0ea5e9;
+  transform: translateY(-2px);
+}
+
+/* Actions layout for Save / Cancel buttons */
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Match cancel button styling to save button when inside .actions */
+.actions .save-btn,
+.actions .cancel-btn {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #38bdf8;
+  color: #020617;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.actions .save-btn:hover,
+.actions .cancel-btn:hover {
   background-color: #0ea5e9;
   transform: translateY(-2px);
 }
