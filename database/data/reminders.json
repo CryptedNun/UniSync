@@ -27,55 +27,5 @@
       "Sat"
     ],
     "user": "Cacodyl"
-  },
-  {
-    "id": 1766765660158,
-    "title": "ta",
-    "description": "",
-    "time": "01:02",
-    "repeat": "Once",
-    "days": [],
-    "user": "Tahmid"
-  },
-  {
-    "id": 1766765883458,
-    "title": "a",
-    "description": "",
-    "time": "01:02",
-    "repeat": "Daily",
-    "days": [
-      "Sun",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat"
-    ],
-    "user": "Tahmid"
-  },
-  {
-    "id": 1766765895243,
-    "title": "23",
-    "description": "a",
-    "time": "01:02",
-    "repeat": "Sun, Mon",
-    "days": [
-      "Sun",
-      "Mon"
-    ],
-    "user": "Tahmid"
-  },
-  {
-    "id": 1766765902996,
-    "title": "23232",
-    "description": "",
-    "time": "03:02",
-    "repeat": "Sun, Mon",
-    "days": [
-      "Sun",
-      "Mon"
-    ],
-    "user": "Tahmid"
   }
 ]

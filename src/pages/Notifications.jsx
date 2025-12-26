@@ -1,4 +1,33 @@
-function Notifications({ notifications, markRead, deleteNotification }) {
+import { useEffect } from "react"
+
+
+function Notifications({ notifications, setNotifications, markRead, deleteNotification,  }) {
+  // POLL FOR NEW DATA
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Assuming you store token here
+        const res = await fetch("http://localhost:3000/api/notifications", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.ok) {
+            const data = await res.json();
+           // In a real app, compare if data is different before setting to avoid re-renders
+            setNotifications(data); 
+        }
+      } catch (err) {
+        console.error("Polling error", err);
+      }
+    };
+
+    // Check every 5 seconds
+    const interval = setInterval(fetchNotifications, 5000);
+
+    // Cleanup when leaving page
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array
+
+
   return (
     <div className="dashboard">
       <div className="dashboard-header">

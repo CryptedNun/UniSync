@@ -1,38 +1,11 @@
 [
   {
-    "id": "1766765660182",
-    "reminderId": 1766765660158,
+    "id": "17667686400254gfr3",
     "user": "Tahmid",
-    "title": "ta",
-    "fireAt": "01:02",
-    "read": false,
-    "createdAt": "2025-12-26T16:14:20.182Z"
-  },
-  {
-    "id": "1766765883502",
-    "reminderId": 1766765883458,
-    "user": "Tahmid",
-    "title": "a",
-    "fireAt": "01:02",
-    "read": false,
-    "createdAt": "2025-12-26T16:18:03.502Z"
-  },
-  {
-    "id": "1766765895288",
-    "reminderId": 1766765895243,
-    "user": "Tahmid",
-    "title": "23",
-    "fireAt": "01:02",
-    "read": false,
-    "createdAt": "2025-12-26T16:18:15.288Z"
-  },
-  {
-    "id": "1766765903026",
-    "reminderId": 1766765902996,
-    "user": "Tahmid",
-    "title": "23232",
-    "fireAt": "03:02",
-    "read": false,
-    "createdAt": "2025-12-26T16:18:23.026Z"
+    "title": "Math 145",
+    "message": "Scheduled reminder: No description",
+    "time": "23:04",
+    "read": true,
+    "createdAt": "2025-12-26T17:04:00.025Z"
   }
 ]
