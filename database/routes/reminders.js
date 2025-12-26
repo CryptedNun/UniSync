@@ -5,6 +5,34 @@ const router = express.Router()
 
 const DATA_FILE = path.join(__dirname, "..", "data", "reminders.json")
 const USERS_FILE = path.join(__dirname, "..", "data", "users.json")
+const NOTIFICATIONS_FILE = path.join(__dirname, "..", "data", "notifications.json")
+
+function readNotifications() {
+	try {
+		const raw = fs.readFileSync(NOTIFICATIONS_FILE, "utf8")
+		return JSON.parse(raw || "[]")
+	} catch {
+    	return []
+	}
+}
+
+function writeNotifications(data) {
+	fs.writeFileSync(NOTIFICATIONS_FILE, JSON.stringify(data, null, 2), "utf8")
+}
+
+function buildNotification(reminder, user) {
+  return {
+    id: Date.now().toString(), // replace with uuid later
+    reminderId: reminder.id,
+    user: user.username,
+    title: reminder.title,
+    fireAt: reminder.time, // later convert to full datetime
+    read: false,
+    createdAt: new Date().toISOString()
+  }
+}
+
+
 
 function readData() {
 	try {
@@ -56,7 +84,17 @@ router.post("/", (req, res) => {
 	const toSave = Object.assign({}, reminder, { user: user.username })
 	reminders.push(toSave)
 	writeData(reminders)
-	res.status(201).json(toSave)
+
+	
+	const notifications = readNotifications()
+	const notification = buildNotification(toSave, user)
+	notifications.push(notification)
+	writeNotifications(notifications)
+
+	res.status(201).json({
+		reminder: toSave,
+		notification
+	})
 })
 
 // DELETE /:id -> delete reminder if owned by authenticated user

@@ -1,19 +1,20 @@
 const express = require("express")
 const cors = require("cors")
 const path = require("path")
-const app = express()
 
+const app = express()
 const PORT = 3000
 
 app.use(cors())
 app.use(express.json())
 
-// Mount reminders route
+// Routes
 const remindersRoute = require(path.join(__dirname, "routes", "reminders"))
-app.use("/api/reminders", remindersRoute)
-
-// Mount auth route
+const notificationsRoute = require(path.join(__dirname, "routes", "notifications"))
 const authRoute = require(path.join(__dirname, "routes", "auth"))
+
+app.use("/api/reminders", remindersRoute)
+app.use("/api/notifications", notificationsRoute)
 app.use("/api/auth", authRoute)
 
 // Mount requests and teams routes
@@ -23,5 +24,5 @@ const teamsRoute = require(path.join(__dirname, "routes", "teams"))
 app.use("/api/teams", teamsRoute)
 
 app.listen(PORT, () => {
-	console.log(`Database server running on http://localhost:${PORT}`)
+  console.log(`Backend running on http://localhost:${PORT}`)
 })
