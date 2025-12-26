@@ -17,6 +17,12 @@ app.use("/api/reminders", remindersRoute)
 app.use("/api/notifications", notificationsRoute)
 app.use("/api/auth", authRoute)
 
+// Mount requests and teams routes
+const requestsRoute = require(path.join(__dirname, "routes", "requests"))
+app.use("/api/requests", requestsRoute)
+const teamsRoute = require(path.join(__dirname, "routes", "teams"))
+app.use("/api/teams", teamsRoute)
+
 app.listen(PORT, () => {
   console.log(`Backend running on http://localhost:${PORT}`)
 })

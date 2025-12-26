@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1766764537081,
+    "owner": "CryptedNun",
+    "caption": "Test2",
+    "description": "Desc for Test2",
+    "max_participants": 2,
+    "participants": [
+      {
+        "user_id": "Cacodyl"
+      },
+      {
+        "user_id": "CryptedNun"
+      }
+    ],
+    "completed": true
+  },
+  {
+    "id": 1766764520611,
+    "owner": "CryptedNun",
+    "caption": "Test1",
+    "description": "Desc for Test 1",
+    "max_participants": 2,
+    "participants": [],
+    "completed": true
+  },
+  {
+    "id": 1766764461316,
+    "owner": "CryptedNun",
+    "caption": "aa",
+    "description": "a",
+    "max_participants": 2,
+    "participants": [],
+    "completed": true
+  }
+]
