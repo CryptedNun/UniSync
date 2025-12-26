@@ -1,5 +1,16 @@
 import { useNavigate } from "react-router-dom";
 
+// Helper function to convert 24-hour format to 12-hour format with AM/PM
+function convertTo12HourFormat(time24) {
+  if (!time24) return time24
+  const [hours, minutes] = time24.split(':')
+  let hour = parseInt(hours)
+  const ampm = hour >= 12 ? 'PM' : 'AM'
+  hour = hour % 12
+  hour = hour ? hour : 12 // 0 becomes 12
+  return `${String(hour).padStart(2, '0')}:${minutes} ${ampm}`
+}
+
 function MyReminders({ reminders = [], removeReminder }) {
   const navigate = useNavigate()
   return (
@@ -25,7 +36,7 @@ function MyReminders({ reminders = [], removeReminder }) {
               </button>
               <h3>{reminder.title}</h3>
               {reminder.description && <p className="desc">{reminder.description}</p>}
-              <p>Time: {reminder.time}</p>
+              <p>Time: {convertTo12HourFormat(reminder.time)}</p>
               <p>Repeat: {reminder.repeat}</p>
             </div>
           ))

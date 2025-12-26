@@ -24,6 +24,17 @@ const readJSON = (file) => {
     }
 };
 
+// Helper function to convert 24-hour format to 12-hour format with AM/PM
+const convertTo12HourFormat = (time24) => {
+    if (!time24) return time24;
+    const [hours, minutes] = time24.split(':');
+    let hour = parseInt(hours);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    hour = hour % 12;
+    hour = hour ? hour : 12; // 0 becomes 12
+    return `${String(hour).padStart(2, '0')}:${minutes} ${ampm}`;
+};
+
 // --- SCHEDULER (BACKGROUND TASK) ---
 // This runs every minute to check if any reminders need to trigger a notification
 cron.schedule('* * * * *', () => {
@@ -60,7 +71,7 @@ cron.schedule('* * * * *', () => {
 				user: reminder.user,
 				title: reminder.title,
 				message: reminder.description || `It is time for ${reminder.title}`,
-				time: currentTime,
+				time: convertTo12HourFormat(currentTime),
 				read: false,
 				createdAt: new Date().toISOString()
 			};

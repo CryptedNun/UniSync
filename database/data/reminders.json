@@ -27,5 +27,19 @@
       "Sat"
     ],
     "user": "Cacodyl"
+  },
+  {
+    "id": 1766771280153,
+    "title": "Math 143",
+    "description": "",
+    "time": "10:00",
+    "repeat": "Sun, Mon, Fri, Sat",
+    "days": [
+      "Sun",
+      "Mon",
+      "Fri",
+      "Sat"
+    ],
+    "user": "TestCase ID"
   }
 ]

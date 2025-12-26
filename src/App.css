@@ -376,7 +376,8 @@
 
 /* Inputs for auth (username / password) */
 .add-page input[type="text"],
-.add-page input[type="password"] {
+.add-page input[type="password"],
+.add-page input[type="number"] {
   width: 100%;
   padding: 12px 14px;
   margin-bottom: 18px;
