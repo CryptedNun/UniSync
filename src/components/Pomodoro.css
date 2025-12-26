@@ -7,7 +7,7 @@
   box-shadow: 0 8px 24px rgba(2,6,23,0.6);
   border: 1px solid rgba(255,255,255,0.04);
   width: 100%;
-}
+} 
 .pomodoro-top{ display:flex; align-items:center; justify-content:space-between; }
 .pomodoro-state{ font-weight:700; color:#cbd5e1; font-size:0.95rem; }
 .pomodoro-timer{ font-size:1.6rem; font-weight:800; color:transparent; background: linear-gradient(90deg,#7dd3fc,#c084fc); -webkit-background-clip: text; background-clip: text; }
