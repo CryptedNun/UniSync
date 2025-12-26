@@ -12,6 +12,10 @@ app.use(express.json())
 const remindersRoute = require(path.join(__dirname, "routes", "reminders"))
 app.use("/api/reminders", remindersRoute)
 
+// Mount auth route
+const authRoute = require(path.join(__dirname, "routes", "auth"))
+app.use("/api/auth", authRoute)
+
 app.listen(PORT, () => {
 	console.log(`Database server running on http://localhost:${PORT}`)
 })
