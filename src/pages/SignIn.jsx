@@ -23,7 +23,7 @@ function SignIn({ signIn, signUp }) {
       <h1>{mode === "signin" ? "Sign In" : "Sign Up"}</h1>
 
       <label>Username</label>
-      <input value={username} onChange={(e) => setUsername(e.target.value)} />
+      <input type = "text" value={username} onChange={(e) => setUsername(e.target.value)} />
 
       <label>Password</label>
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />

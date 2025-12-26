@@ -368,3 +368,56 @@
     font-size: 12px;
   }
 }
+
+/* Sign In / Sign Up page refinements */
+.add-page.auth {
+  max-width: 420px; /* slightly tighter for auth */
+}
+
+/* Inputs for auth (username / password) */
+.add-page input[type="text"],
+.add-page input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: 1px solid #1e293b;
+  background-color: #0f172a;
+  color: #e5e7eb;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-page input[type="text"]:focus,
+.add-page input[type="password"]:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 6px rgba(56, 189, 248, 0.45);
+}
+
+/* Button row for Sign In / Switch */
+.auth-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Make primary action stand out */
+.auth-actions .save-btn {
+  flex: 1;
+}
+
+/* Secondary switch button styling */
+.auth-actions .add-btn {
+  flex: 1;
+  background-color: #020617;
+  border: 1px solid #1e293b;
+}
+
+/* Subtle divider text */
+.auth-hint {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13px;
+  color: #94a3b8;
+}
