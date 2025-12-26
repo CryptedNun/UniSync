@@ -7,6 +7,17 @@ const DATA_FILE = path.join(__dirname, "..", "data", "reminders.json")
 const USERS_FILE = path.join(__dirname, "..", "data", "users.json")
 const NOTIFICATIONS_FILE = path.join(__dirname, "..", "data", "notifications.json")
 
+// Helper function to convert 24-hour format to 12-hour format with AM/PM
+function convertTo12HourFormat(time24) {
+	if (!time24) return time24
+	const [hours, minutes] = time24.split(':')
+	let hour = parseInt(hours)
+	const ampm = hour >= 12 ? 'PM' : 'AM'
+	hour = hour % 12
+	hour = hour ? hour : 12 // 0 becomes 12
+	return `${String(hour).padStart(2, '0')}:${minutes} ${ampm}`
+}
+
 function readNotifications() {
 	try {
 		const raw = fs.readFileSync(NOTIFICATIONS_FILE, "utf8")
@@ -26,7 +37,7 @@ function buildNotification(reminder, user) {
     reminderId: reminder.id,
     user: user.username,
     title: reminder.title,
-    fireAt: reminder.time, // later convert to full datetime
+    fireAt: convertTo12HourFormat(reminder.time), // later convert to full datetime
     read: false,
     createdAt: new Date().toISOString()
   }

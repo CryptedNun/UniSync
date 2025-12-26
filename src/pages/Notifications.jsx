@@ -1,10 +1,83 @@
-function Notifications({ notifications, markRead, deleteNotification }) {
+<<<<<<< Updated upstream
+import { useEffect } from "react"
+
+
+function Notifications({ notifications, setNotifications, markRead, deleteNotification,  }) {
+  // POLL FOR NEW DATA
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Assuming you store token here
+        const res = await fetch("http://localhost:3000/api/notifications", {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.ok) {
+            const data = await res.json();
+           // In a real app, compare if data is different before setting to avoid re-renders
+            setNotifications(data); 
+        }
+      } catch (err) {
+        console.error("Polling error", err);
+      }
+    };
+
+    // Check every 5 seconds
+    const interval = setInterval(fetchNotifications, 5000);
+
+    // Cleanup when leaving page
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array
+
+
   return (
     <div className="dashboard">
+=======
+import { useNavigate } from "react-router-dom";
+
+function Notifications() {
+  const navigate = useNavigate();
+
+  const notifications = [
+    {
+      id: 1,
+      title: "Reminder Created",
+      message: "Your reminder 'Drink Water' was added successfully.",
+      time: "Just now",
+    },
+    {
+      id: 2,
+      title: "Upcoming Reminder",
+      message: "You have a reminder scheduled in 30 minutes.",
+      time: "30 min left",
+    },
+    {
+      id: 3,
+      title: "System Update",
+      message: "A new dashboard update is now live.",
+      time: "Yesterday",
+    },
+    {
+      id: 4,
+      title: "Weekly Summary",
+      message: "You completed 5 reminders this week. Great job!",
+      time: "2 days ago",
+    },
+  ];
+
+  return (
+    <div className="dashboard">
+      {/* Back Button */}
+      <button className="dashboard-back" onClick={() => navigate("/")}>
+        ← Back to Dashboard
+      </button>
+
+      {/* Header */}
+>>>>>>> Stashed changes
       <div className="dashboard-header">
         <h1>Notifications</h1>
       </div>
 
+<<<<<<< Updated upstream
       <section>
         {notifications.length === 0 && (
           <p style={{ color: "#94a3b8" }}>No notifications</p>
@@ -25,11 +98,28 @@ function Notifications({ notifications, markRead, deleteNotification }) {
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h3>{note.title}</h3>
               <span style={{ fontSize: 13, color: "#94a3b8" }}>
+=======
+      {/* Notifications List */}
+      <section>
+        {notifications.map((note) => (
+          <div key={note.id} className="card" style={{ width: "100%" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "8px",
+              }}
+            >
+              <h3>{note.title}</h3>
+              <span style={{ fontSize: "13px", color: "#94a3b8" }}>
+>>>>>>> Stashed changes
                 {note.time}
               </span>
             </div>
 
             <p>{note.message}</p>
+<<<<<<< Updated upstream
 
             <div style={{ marginTop: 10, display: "flex", gap: 10 }}>
               {!note.read && (
@@ -41,11 +131,20 @@ function Notifications({ notifications, markRead, deleteNotification }) {
                 Delete
               </button>
             </div>
+=======
+>>>>>>> Stashed changes
           </div>
         ))}
       </section>
     </div>
+<<<<<<< Updated upstream
   )
 }
 
 export default Notifications
+=======
+  );
+};
+
+export default Notifications;
+>>>>>>> Stashed changes

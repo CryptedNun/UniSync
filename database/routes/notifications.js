@@ -29,49 +29,41 @@ function getUserFromToken(req) {
 router.get("/", (req, res) => {
   const user = getUserFromToken(req)
   if (!user) return res.status(401).json([])
-
-  const notifs = readFile().filter(
-    (n) => n.user === user.username
-  )
-
+  const notifs = readFile().filter(n => n.user === user.username && !n.read)
   res.json(notifs)
 })
 
 // MARK AS READ
 router.patch("/:id/read", (req, res) => {
-  const user = getUserFromToken(req)
-  if (!user) return res.status(401).json({ error: "Unauthorized" })
+  const user = getUserFromToken(req);
+  if (!user) return res.status(401).json({ error: "Unauthorized" });
 
-  const notifications = readFile()
+  const notifications = readFile();
+  // Ensure both are treated as strings
   const notif = notifications.find(
-    (n) => String(n.id) === String(req.params.id) && n.user === user.username
-  )
+    (n) => n.id.toString() === req.params.id.toString() && n.user === user.username
+  );
 
-  if (!notif) return res.status(404).json({ error: "Not found" })
+  if (!notif) return res.status(404).json({ error: "Not found" });
 
-  notif.read = true
-  writeFile(notifications)
-  res.json(notif)
-})
+  notif.read = true;
+  writeFile(notifications);
+  res.json({ success: true });
+});
 
-// DELETE notification
+// DELETE
 router.delete("/:id", (req, res) => {
-  const user = getUserFromToken(req)
-  if (!user) return res.status(401).json({ error: "Unauthorized" })
+  const user = getUserFromToken(req);
+  if (!user) return res.status(401).json({ error: "Unauthorized" });
 
-  let notifications = readFile()
-  const before = notifications.length
+  let notifications = readFile();
+  // Filter out the one to delete
+  const updated = notifications.filter(
+    (n) => !(n.id.toString() === req.params.id.toString() && n.user === user.username)
+  );
 
-  notifications = notifications.filter(
-    (n) => !(String(n.id) === String(req.params.id) && n.user === user.username)
-  )
-
-  if (notifications.length === before) {
-    return res.status(404).json({ error: "Not found" })
-  }
-
-  writeFile(notifications)
-  res.json({ success: true })
-})
+  writeFile(updated);
+  res.json({ success: true });
+});
 
 module.exports = router
