@@ -3,21 +3,21 @@
   margin-top:8px;
   padding:14px;
   border-radius:10px;
-  background: linear-gradient(180deg, #ffffff, #f8fafc);
-  box-shadow: 0 6px 18px rgba(2,6,23,0.08);
-  border: 1px solid rgba(2,6,23,0.06);
+  background: linear-gradient(180deg, #0b1220, #071022);
+  box-shadow: 0 8px 24px rgba(2,6,23,0.6);
+  border: 1px solid rgba(255,255,255,0.04);
   width: 100%;
 }
 .pomodoro-top{ display:flex; align-items:center; justify-content:space-between; }
-.pomodoro-state{ font-weight:700; color:#0f172a; font-size:0.95rem; }
-.pomodoro-timer{ font-size:1.6rem; font-weight:800; color:#0f172a; background: linear-gradient(90deg,#0ea5e9,#7c3aed); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pomodoro-state{ font-weight:700; color:#cbd5e1; font-size:0.95rem; }
+.pomodoro-timer{ font-size:1.6rem; font-weight:800; color:transparent; background: linear-gradient(90deg,#7dd3fc,#c084fc); -webkit-background-clip: text; background-clip: text; }
 .pomodoro-controls { margin:12px 0; }
-.pom-btn{ margin-right:8px; padding:8px 12px; border-radius:8px; border: none; background:#e6eef9; color:#083344; cursor:pointer; box-shadow: 0 2px 6px rgba(3,7,18,0.04); }
-.pom-btn:hover{ transform: translateY(-1px); }
-.pom-btn.stop{ background:#fee2e2; color:#7f1d1d; }
-.pomodoro-total{ color:#475569; font-size:0.9rem; }
+.pom-btn{ margin-right:8px; padding:8px 12px; border-radius:8px; border: none; background:#0f172a; color:#a5f3fc; cursor:pointer; box-shadow: 0 4px 12px rgba(2,6,23,0.6); }
+.pom-btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+.pom-btn.stop{ background:#2b0b0b; color:#ffd7d7; }
+.pomodoro-total{ color:#94a3b8; font-size:0.9rem; }
 
 /* ensure the dashboard-like button used by the component matches other buttons */
-.pomodoro-btn{ display:flex; align-items:center; justify-content:center; min-height:48px; }
+.pomodoro-btn{ display:flex; align-items:center; justify-content:center; min-height:48px; background: #071022; color: #7dd3fc; }
 
 
