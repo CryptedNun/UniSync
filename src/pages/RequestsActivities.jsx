@@ -1,4 +1,5 @@
 import RequestCard from "../components/RequestCard";
+import { useNavigate } from "react-router-dom";
 
 const dummyRequests = [
   {
@@ -17,14 +18,15 @@ const dummyRequests = [
   },
 ];
 
-function RequestsActivities({ currentUser, setActivePage }) {
+function RequestsActivities({ currentUser }) {
   const handleJoin = (requestId) => {
     console.log("Joining request", requestId);
   };
+  const navigate = useNavigate()
 
   return (
     <div className="dashboard">
-      <button className="dashboard-back" onClick={() => setActivePage("dashboard")}>
+      <button className="dashboard-back" onClick={() => navigate("/")}>
         ← Back to Dashboard
       </button>
 
@@ -40,7 +42,7 @@ function RequestsActivities({ currentUser, setActivePage }) {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
 export default RequestsActivities;

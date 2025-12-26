@@ -1,4 +1,5 @@
 import RequestCard from "../components/RequestCard";
+import { useNavigate } from "react-router-dom";
 
 const dummyRequests = [
   {
@@ -22,7 +23,8 @@ const dummyNotices = [
   { id: 2, content: "📢 Hackathon Registration closes tonight" },
 ];
 
-function Dashboard({ setActivePage }) {
+function Dashboard() {
+  const navigate = useNavigate()
   return (
     <div className="dashboard">
       <h1>Dashboard</h1>
@@ -30,20 +32,20 @@ function Dashboard({ setActivePage }) {
       <div className="dashboard-buttons">
         <button
           className="dashboard-btn"
-          onClick={() => setActivePage("requests")}
+          onClick={() => navigate("/requests")}
         >
           Requests / Activities
         </button>
 
         <button
           className="dashboard-btn"
-          onClick={() => setActivePage("notices")}
+          onClick={() => navigate("/notices")}
         >
           Notices
         </button>
       </div>
     </div>
-  );
+  )
 }
 
 export default Dashboard;

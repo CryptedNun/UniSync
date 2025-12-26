@@ -1,8 +1,12 @@
-function Navbar({ activePage, setActivePage }) {
+import { useNavigate, useLocation } from "react-router-dom";
+
+function Navbar() {
+  const navigate = useNavigate()
+  const location = useLocation()
   const menu = [
-    { name: "Dashboard", key: "dashboard" },
-    { name: "My Reminders", key: "reminders" },
-    { name: "My Teams", key: "teams" },
+    { name: "Dashboard", to: "/" },
+    { name: "My Reminders", to: "/myreminders" },
+    { name: "My Teams", to: "/myteams" },
   ];
 
   return (
@@ -11,16 +15,16 @@ function Navbar({ activePage, setActivePage }) {
       <ul className="nav-links">
         {menu.map((item) => (
           <li
-            key={item.key}
-            className={activePage === item.key ? "active" : ""}
-            onClick={() => setActivePage(item.key)}
+            key={item.to}
+            className={location.pathname === item.to ? "active" : ""}
+            onClick={() => navigate(item.to)}
           >
             {item.name}
           </li>
         ))}
       </ul>
     </nav>
-  );
+  )
 }
 
 export default Navbar;

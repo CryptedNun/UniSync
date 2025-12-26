@@ -1,12 +1,15 @@
+import { useNavigate } from "react-router-dom";
+
 const dummyNotices = [
   { id: 1, content: "📢 Semester Ends on Dec 30" },
   { id: 2, content: "📢 Hackathon Registration closes tonight" },
 ];
 
-function Notices({ setActivePage }) {
+function Notices() {
+  const navigate = useNavigate()
   return (
     <div className="dashboard">
-      <button className="dashboard-back" onClick={() => setActivePage("dashboard")}>
+      <button className="dashboard-back" onClick={() => navigate("/")}>
         ← Back to Dashboard
       </button>
 
@@ -19,7 +22,7 @@ function Notices({ setActivePage }) {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
 export default Notices;

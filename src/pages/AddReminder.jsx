@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function AddReminder({ setActivePage, addReminder }) {
+function AddReminder({ addReminder }) {
+    const navigate = useNavigate()
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -40,6 +42,7 @@ function AddReminder({ setActivePage, addReminder }) {
         setDescription("");
         setTime("");
         setSelectedDays([]);
+        navigate("/myreminders")
     };
 
     return (
@@ -88,7 +91,7 @@ function AddReminder({ setActivePage, addReminder }) {
                 >
                     Save
                 </button>
-                <button className="cancel-btn" onClick={() => setActivePage("reminders")}>
+                <button className="cancel-btn" onClick={() => navigate("/myreminders")}>
                     Cancel
                 </button>
             </div>
