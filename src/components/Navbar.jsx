@@ -7,6 +7,7 @@ function Navbar({ currentUser, onSignOut }) {
     { name: "Dashboard", to: "/" },
     { name: "My Reminders", to: "/myreminders" },
     { name: "My Teams", to: "/myteams" },
+    { name: "Notifications", to: "/notifications" },
   ];
 
   return (
