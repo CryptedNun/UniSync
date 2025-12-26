@@ -45,8 +45,13 @@ function Dashboard() {
         >
           Notices
         </button>
+<<<<<<< Updated upstream
         
         <Pomodoro />
+=======
+
+        
+>>>>>>> Stashed changes
       </div>
     </div>
   )
