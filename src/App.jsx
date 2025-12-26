@@ -8,7 +8,10 @@ import MyReminders from "./pages/MyReminders";
 import MyTeams from "./pages/MyTeams";
 import AddReminder from "./pages/AddReminder";
 import Notifications from "./pages/Notifications";
+<<<<<<< Updated upstream
 import SignIn from "./pages/SignIn";
+=======
+>>>>>>> Stashed changes
 import "./App.css";
 
 function App() {
@@ -200,6 +203,7 @@ function App() {
     <div className="app">
       <Navbar currentUser={auth.username} onSignOut={signOut} />
       <Routes>
+<<<<<<< Updated upstream
         <Route path="/" element={<Protected><Dashboard /></Protected>} />
         <Route path="/requests" element={<Protected><RequestsActivities currentUser={auth} /></Protected>} />
         <Route path="/notices" element={<Protected><Notices /></Protected>} />
@@ -217,6 +221,15 @@ function App() {
             </Protected>}/>
 
         <Route path="/signin" element={<SignIn signIn={signIn} signUp={signUp} />} />
+=======
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/requests" element={<RequestsActivities currentUser={currentUser} />} />
+        <Route path="/notices" element={<Notices />} />
+        <Route path="/myreminders" element={<MyReminders reminders={reminders} removeReminder={deleteReminder} />} />
+        <Route path="/myteams" element={<MyTeams />} />
+        <Route path="/add-reminder" element={<AddReminder addReminder={addReminder} />} />
+        <Route path="/notifications" element={<Notifications />} />
+>>>>>>> Stashed changes
       </Routes>
     </div>
   )
