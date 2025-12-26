@@ -1,0 +1,14 @@
+.dashboard-buttons{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.dashboard-btn{
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  cursor: pointer;
+}
