@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 [
   {
     "id": 1766729055553,
@@ -28,15 +27,6 @@
       "Sat"
     ],
     "user": "Cacodyl"
-  },
-  {
-    "id": 1766765616569,
-    "title": "Math",
-    "description": "",
-    "time": "22:14",
-    "repeat": "Once",
-    "days": [],
-    "user": "Tahmid"
   },
   {
     "id": 1766765660158,
@@ -89,6 +79,3 @@
     "user": "Tahmid"
   }
 ]
-=======
-[]
->>>>>>> Stashed changes
