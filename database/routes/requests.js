@@ -28,6 +28,7 @@ function sanitizeRequest(r, username) {
     description: r.description,
     max_participants: r.max_participants,
     participants_count: (r.participants || []).length,
+    participants: (r.participants || []).map(p => ({ user_id: p.user_id })),
     completed: !!r.completed,
     joined: username ? !!(r.participants || []).some(p => p.user_id === username) : false,
     isOwner: username ? r.owner === username : false,

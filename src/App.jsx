@@ -134,7 +134,7 @@ function App() {
         <Route path="/requests" element={<Protected><RequestsActivities currentUser={auth} /></Protected>} />
         <Route path="/notices" element={<Protected><Notices /></Protected>} />
         <Route path="/myreminders" element={<Protected><MyReminders reminders={reminders} removeReminder={deleteReminder} /></Protected>} />
-        <Route path="/myteams" element={<Protected><MyTeams /></Protected>} />
+        <Route path="/myteams" element={<Protected><MyTeams currentUser={auth} /></Protected>} />
         <Route path="/add-reminder" element={<Protected><AddReminder addReminder={addReminder} /></Protected>} />
         <Route path="notifications" element={<Protected><Notifications /></Protected>} />
         <Route path="/signin" element={<SignIn signIn={signIn} signUp={signUp} />} />

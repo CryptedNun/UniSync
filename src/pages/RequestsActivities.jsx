@@ -11,66 +11,118 @@ function RequestsActivities({ currentUser }) {
   const [newCaption, setNewCaption] = useState("");
   const [newDescription, setNewDescription] = useState("");
   const [newMax, setNewMax] = useState(2);
+  const API = "http://localhost:3000/api"
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) {
-        setRequests(JSON.parse(raw));
-      } else {
-        const seed = [
-          { id: 1, owner: "CryptedNun", caption: "Tuition Offer", description: "Need 1 student to tutor Math 10", max_participants: 2, participants: [{ user_id: "CryptedNun" }], completed: false },
-          { id: 2, owner: "Cacodyl", caption: "Weekend Trip", description: "Looking for 3 friends for hiking", max_participants: 4, participants: [{ user_id: "Cacodyl" }], completed: false },
-        ];
-        setRequests(seed);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(seed));
-      }
-    } catch (e) {}
-  }, []);
+    let mounted = true
+    const headers = currentUser && currentUser.token ? { Authorization: `Bearer ${currentUser.token}` } : {}
+    fetch(`${API}/requests/`, { headers })
+      .then(r => { if (!r.ok) throw new Error('no-api') ; return r.json() })
+      .then(data => { if (mounted && Array.isArray(data)) setRequests(data) })
+      .catch(() => {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY)
+          if (raw) setRequests(JSON.parse(raw))
+        } catch(e){}
+      })
+    return () => { mounted = false }
+  }, [currentUser])
 
-  function persist(next) {
+  function persistToLocal(next) {
     setRequests(next);
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(next)); } catch (e) {}
   }
 
-  function handleJoin(requestId) {
-    const next = requests.map((r) => {
-      if (r.id !== requestId) return r;
-      const already = r.participants?.some(p => p.user_id === currentUser.username);
-      if (already) return r;
-      const count = (r.participants || []).length;
-      if (count >= r.max_participants) return r;
-      const participants = [...(r.participants || []), { user_id: currentUser.username }];
-      return { ...r, participants };
-    });
-    persist(next);
+  async function handleJoin(requestId) {
+    const headers = { 'Content-Type': 'application/json' }
+    if (currentUser && currentUser.token) headers.Authorization = `Bearer ${currentUser.token}`
+    try {
+      const res = await fetch(`${API}/requests/${requestId}/join`, { method: 'POST', headers })
+      if (!res.ok) throw new Error('join-failed')
+      const data = await res.json()
+      const next = requests.map(r => r.id === data.id ? { ...r, participants: r.participants ? [...r.participants, { user_id: currentUser.username }] : [{ user_id: currentUser.username }] } : r)
+      persistToLocal(next)
+    } catch (e) {
+      // fallback local
+      const next = requests.map((r) => {
+        if (r.id !== requestId) return r;
+        const already = r.participants?.some(p => p.user_id === currentUser.username);
+        if (already) return r;
+        const count = (r.participants || []).length;
+        if (count >= r.max_participants) return r;
+        const participants = [...(r.participants || []), { user_id: currentUser.username }];
+        return { ...r, participants };
+      });
+      persistToLocal(next)
+    }
   }
 
-  function handleLeave(requestId) {
-    const next = requests.map((r) => {
-      if (r.id !== requestId) return r;
-      const participants = (r.participants || []).filter(p => p.user_id !== currentUser.username);
-      return { ...r, participants };
-    });
-    persist(next);
+  async function handleLeave(requestId) {
+    const headers = { 'Content-Type': 'application/json' }
+    if (currentUser && currentUser.token) headers.Authorization = `Bearer ${currentUser.token}`
+    try {
+      const res = await fetch(`${API}/requests/${requestId}/leave`, { method: 'POST', headers })
+      if (!res.ok) throw new Error('leave-failed')
+      const data = await res.json()
+      const next = requests.map(r => r.id === data.id ? { ...r, participants: (r.participants || []).filter(p => p.user_id !== currentUser.username) } : r)
+      persistToLocal(next)
+    } catch (e) {
+      const next = requests.map((r) => {
+        if (r.id !== requestId) return r;
+        const participants = (r.participants || []).filter(p => p.user_id !== currentUser.username);
+        return { ...r, participants };
+      });
+      persistToLocal(next)
+    }
   }
 
-  function handleDelete(requestId) {
-    const next = requests.filter(r => r.id !== requestId);
-    persist(next);
+  async function handleDelete(requestId) {
+    const headers = {}
+    if (currentUser && currentUser.token) headers.Authorization = `Bearer ${currentUser.token}`
+    // optimistic
+    const nextLocal = requests.filter(r => r.id !== requestId)
+    persistToLocal(nextLocal)
+    try {
+      await fetch(`${API}/requests/${requestId}`, { method: 'DELETE', headers })
+    } catch (e) {
+      // ignore
+    }
   }
 
-  function handleComplete(requestId) {
-    const next = requests.map(r => r.id === requestId ? { ...r, completed: true } : r);
-    persist(next);
+  async function handleComplete(requestId) {
+    const headers = { 'Content-Type': 'application/json' }
+    if (currentUser && currentUser.token) headers.Authorization = `Bearer ${currentUser.token}`
+    // optimistic
+    const nextLocal = requests.map(r => r.id === requestId ? { ...r, completed: true } : r)
+    persistToLocal(nextLocal)
+    try {
+      const res = await fetch(`${API}/requests/${requestId}/complete`, { method: 'POST', headers })
+      if (!res.ok) throw new Error('complete-failed')
+      const data = await res.json()
+      // Optionally redirect to teams
+      // navigate('/myteams')
+    } catch (e) {
+      // ignore
+    }
   }
 
-  function handleAdd() {
+  async function handleAdd() {
     if (!newCaption.trim()) return;
-    const id = Date.now();
-    const req = { id, owner: currentUser.username, caption: newCaption.trim(), description: newDescription.trim(), max_participants: Number(newMax) || 1, participants: [], completed: false };
-    const next = [req, ...requests];
-    persist(next);
+    const payload = { caption: newCaption.trim(), description: newDescription.trim(), max_participants: Number(newMax) || 1 }
+    const headers = { 'Content-Type': 'application/json' }
+    if (currentUser && currentUser.token) headers.Authorization = `Bearer ${currentUser.token}`
+    try {
+      const res = await fetch(`${API}/requests/`, { method: 'POST', headers, body: JSON.stringify(payload) })
+      if (!res.ok) throw new Error('create-failed')
+      const data = await res.json()
+      const next = [data, ...requests]
+      persistToLocal(next)
+    } catch (e) {
+      const id = Date.now();
+      const req = { id, owner: currentUser.username, caption: newCaption.trim(), description: newDescription.trim(), max_participants: Number(newMax) || 1, participants: [], completed: false };
+      const next = [req, ...requests];
+      persistToLocal(next)
+    }
     setNewCaption(""); setNewDescription(""); setNewMax(2); setShowAdd(false);
   }
 
