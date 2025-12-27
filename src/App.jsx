@@ -200,7 +200,7 @@ function App() {
     <div className="app">
       <Navbar currentUser={auth} onSignOut={signOut} />
       <Routes>
-        <Route path="/" element={<Protected><Dashboard /></Protected>} />
+        <Route path="/" element={<Protected><Dashboard currentUser={auth} /></Protected>} />
         <Route path="/requests" element={<Protected><RequestsActivities currentUser={auth} /></Protected>} />
         <Route path="/notices" element={<Protected><Notices currentUser={auth} /></Protected>} />
         <Route path="/myreminders" element={<Protected><MyReminders reminders={reminders} removeReminder={deleteReminder} /></Protected>} />

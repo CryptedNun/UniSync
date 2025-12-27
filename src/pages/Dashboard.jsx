@@ -25,7 +25,7 @@ const dummyNotices = [
   { id: 2, content: "📢 Hackathon Registration closes tonight" },
 ];
 
-function Dashboard() {
+function Dashboard({ currentUser }) {
   const navigate = useNavigate()
   return (
     <div className="dashboard">
@@ -46,7 +46,7 @@ function Dashboard() {
           Notices
         </button>
 
-        <Pomodoro />
+        <Pomodoro currentUser={currentUser} />
       </div>
     </div>
   )
