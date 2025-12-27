@@ -1,17 +1,5 @@
 [
   {
-    "id": 1766729055553,
-    "title": "re1",
-    "description": "a",
-    "time": "01:01",
-    "repeat": "Mon, Tue",
-    "days": [
-      "Mon",
-      "Tue"
-    ],
-    "user": "CryptedNun"
-  },
-  {
     "id": 1766729654115,
     "title": "dummy2",
     "description": "s",
@@ -41,5 +29,22 @@
       "Sat"
     ],
     "user": "TestCase ID"
+  },
+  {
+    "id": 1766822255266,
+    "title": "❗Finish CSE106 Offline-1",
+    "description": "Link ADT implementation, using both arrays and DLL.",
+    "time": "18:00",
+    "repeat": "Daily",
+    "days": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "user": "CryptedNun"
   }
 ]

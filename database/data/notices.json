@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1766821925252",
+    "caption": "⏱ Deadline for CSE106 Offline-1",
+    "description": "🗓️ Last Date and Time of Submission: 3rd January, 11:59PM",
+    "author": "CryptedNun",
+    "createdAt": "2025-12-27T07:52:05.252Z"
+  },
+  {
+    "id": "1766820686208",
+    "caption": "🤖 Dummy notice for testing!",
+    "description": "A test notice Desc.",
+    "author": "CryptedNun2",
+    "createdAt": "2025-12-27T07:31:26.208Z"
+  },
+  {
+    "id": "1766820665770",
+    "caption": "🤖 Dummy Notice for Testing!",
+    "description": "A test notice Desc.",
+    "author": "CryptedNun2",
+    "createdAt": "2025-12-27T07:31:05.770Z"
+  },
+  {
+    "id": "1766820534099",
+    "caption": "📢 HackJam Coding Phase concludes in 12Hrs",
+    "description": "Ready your PowerPoint presentations and Demo video before it's too late!!",
+    "author": "CryptedNun2",
+    "createdAt": "2025-12-27T07:28:54.099Z"
+  }
+]

@@ -8,7 +8,7 @@ function RequestCard({ request, currentUser, onJoin, onLeave, onDelete, onComple
   return (
     <div className="card">
       <h3>{request.caption}</h3>
-      <p>{request.description}</p>
+      <div style={{ whiteSpace: 'pre-wrap', opacity: 0.95 }}>{request.description}</div>
       <p>{(request.participants?.length || 0)} / {request.max_participants} joined</p>
 
       {!joined && (request.participants?.length || 0) < request.max_participants ? (

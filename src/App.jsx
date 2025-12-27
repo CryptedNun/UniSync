@@ -15,9 +15,9 @@ function App() {
   const [auth, setAuth] = useState(() => {
     try {
       const raw = localStorage.getItem("auth")
-      return raw ? JSON.parse(raw) : { username: null, token: null }
+      return raw ? JSON.parse(raw) : { username: null, token: null, roll: null }
     } catch (e) {
-      return { username: null, token: null }
+      return { username: null, token: null, roll: null }
     }
   })
 
@@ -158,39 +158,39 @@ function App() {
 
 
 
-  const signUp = async (username, password) => {
+  const signUp = async (username, password, roll) => {
     try {
       const res = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, roll }),
       })
       const data = await res.json()
       if (!res.ok) throw data
-      setAuth({ username: data.username, token: data.token })
+      setAuth({ username: data.username, token: data.token, roll: data.roll })
       return { ok: true }
     } catch (e) {
       return { ok: false, error: e }
     }
   }
 
-  const signIn = async (username, password) => {
+  const signIn = async (username, password, roll) => {
     try {
       const res = await fetch("http://localhost:3000/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, roll }),
       })
       const data = await res.json()
       if (!res.ok) throw data
-      setAuth({ username: data.username, token: data.token })
+      setAuth({ username: data.username, token: data.token, roll: data.roll })
       return { ok: true }
     } catch (e) {
       return { ok: false, error: e }
     }
   }
 
-  const signOut = () => setAuth({ username: null, token: null })
+  const signOut = () => setAuth({ username: null, token: null, roll: null })
 
   const Protected = ({ children }) => {
     return auth && auth.username ? children : <Navigate to="/signin" replace />
@@ -198,11 +198,11 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar currentUser={auth.username} onSignOut={signOut} />
+      <Navbar currentUser={auth} onSignOut={signOut} />
       <Routes>
         <Route path="/" element={<Protected><Dashboard /></Protected>} />
         <Route path="/requests" element={<Protected><RequestsActivities currentUser={auth} /></Protected>} />
-        <Route path="/notices" element={<Protected><Notices /></Protected>} />
+        <Route path="/notices" element={<Protected><Notices currentUser={auth} /></Protected>} />
         <Route path="/myreminders" element={<Protected><MyReminders reminders={reminders} removeReminder={deleteReminder} /></Protected>} />
         <Route path="/myteams" element={<Protected><MyTeams currentUser={auth} /></Protected>} />
         <Route path="/add-reminder" element={<Protected><AddReminder addReminder={addReminder} /></Protected>} />
