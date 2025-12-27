@@ -1,24 +1,31 @@
 [
   {
+    "id": "1766840321994",
+    "caption": "📏 ME174 Drawing Homework Due",
+    "description": "Due next academic week.",
+    "author": "Cacodyl",
+    "createdAt": "2025-12-27T12:58:41.994Z"
+  },
+  {
+    "id": "1766840178628",
+    "caption": "✒️ ME165 CT Upcoming",
+    "description": "🗓️ Date: 3rdJan 2026",
+    "author": "Cacodyl",
+    "createdAt": "2025-12-27T12:56:18.628Z"
+  },
+  {
+    "id": "1766839713280",
+    "caption": "📝 CHEM118 Experiment-2 Lab Report Due",
+    "description": "Due next Academic Week.",
+    "author": "Cacodyl",
+    "createdAt": "2025-12-27T12:48:33.280Z"
+  },
+  {
     "id": "1766821925252",
     "caption": "⏱ Deadline for CSE106 Offline-1",
     "description": "🗓️ Last Date and Time of Submission: 3rd January, 11:59PM",
     "author": "CryptedNun",
     "createdAt": "2025-12-27T07:52:05.252Z"
-  },
-  {
-    "id": "1766820686208",
-    "caption": "🤖 Dummy notice for testing!",
-    "description": "A test notice Desc.",
-    "author": "CryptedNun2",
-    "createdAt": "2025-12-27T07:31:26.208Z"
-  },
-  {
-    "id": "1766820665770",
-    "caption": "🤖 Dummy Notice for Testing!",
-    "description": "A test notice Desc.",
-    "author": "CryptedNun2",
-    "createdAt": "2025-12-27T07:31:05.770Z"
   },
   {
     "id": "1766820534099",

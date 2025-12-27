@@ -6,6 +6,7 @@ const router = express.Router()
 const REQUESTS_FILE = path.join(__dirname, '..', 'data', 'requests.json')
 const USERS_FILE = path.join(__dirname, '..', 'data', 'users.json')
 const TEAMS_FILE = path.join(__dirname, '..', 'data', 'teams.json')
+const NOTIFS_FILE = path.join(__dirname, '..', 'data', 'notifications.json')
 
 function readJSON(file) {
   try { return JSON.parse(fs.readFileSync(file, 'utf8') || '[]') } catch (e) { return [] }
@@ -58,6 +59,25 @@ router.post('/', (req, res) => {
   const reqObj = { id, owner: user.username, caption, description: description || '', max_participants: Number(max_participants) || 1, participants: [], completed: false }
   requests.unshift(reqObj)
   writeJSON(REQUESTS_FILE, requests)
+  // create notification for every user about the new request
+  try {
+    const notifications = readJSON(NOTIFS_FILE)
+    const users = readJSON(USERS_FILE)
+    const now = new Date().toISOString()
+    users.forEach(u => {
+      notifications.unshift({
+        id: Date.now().toString() + Math.floor(Math.random() * 10000),
+        user: u.username,
+        title: `New request: ${caption}`,
+        message: description || '',
+        read: false,
+        createdAt: now
+      })
+    })
+    writeJSON(NOTIFS_FILE, notifications)
+  } catch (e) {
+    // ignore notification write errors
+  }
   res.json(sanitizeRequest(reqObj, user.username))
 })
 

@@ -1,5 +1,18 @@
 [
   {
+    "id": 1766840570679,
+    "owner": "Cacodyl",
+    "caption": "🎯 Group study for upcoming CT.",
+    "description": "Those who are interested, join and come to Suhrawardy library.",
+    "max_participants": 8,
+    "participants": [
+      {
+        "user_id": "Cacodyl"
+      }
+    ],
+    "completed": false
+  },
+  {
     "id": 1766822161440,
     "owner": "CryptedNun",
     "caption": "👥 Partner needed for upcoming JavaFX Project",
