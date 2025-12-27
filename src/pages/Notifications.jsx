@@ -26,17 +26,17 @@ function Notifications({ notifications = [], setNotifications, markRead, deleteN
 
     fetchNotifications();
     const interval = setInterval(fetchNotifications, 5000);
-    return () => {
-      mounted = false;
-      clearInterval(interval);
-    };
-  }, [setNotifications]);
+
+    // Cleanup when leaving page
+    return () => clearInterval(interval);
+  }, []); // Empty dependency array
+
 
   return (
     <div className="dashboard">
-      {/* Back Button */}
-      <button className="dashboard-back" onClick={() => navigate("/")}>← Back to Dashboard</button>
-      <div className="dashboard-header"><h1>Notifications</h1></div>
+      <div className="dashboard-header">
+        <h1>Notifications</h1>
+      </div>
 
       <section>
         {(!notifications || notifications.length === 0) && (
@@ -55,7 +55,9 @@ function Notifications({ notifications = [], setNotifications, markRead, deleteN
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
               <h3>{note.title}</h3>
-              <span style={{ fontSize: 13, color: "#94a3b8" }}>{note.time}</span>
+              <span style={{ fontSize: 13, color: "#94a3b8" }}>
+                {note.time}
+              </span>
             </div>
 
             <p>{note.message}</p>
@@ -76,7 +78,7 @@ function Notifications({ notifications = [], setNotifications, markRead, deleteN
         ))}
       </section>
     </div>
-  );
+  )
 }
 
 export default Notifications;

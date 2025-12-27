@@ -45,7 +45,6 @@ function Dashboard({ currentUser }) {
         >
           Notices
         </button>
-
         <Pomodoro currentUser={currentUser} />
       </div>
     </div>
