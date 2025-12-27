@@ -5,7 +5,7 @@
   2. Live Requests and Activity Board
   3. Notifies the user of newly added notices and requests.
 
-● Installation Instructions:
+● Installation Instructions: (Make sure node.js is installed)
   1. Download the repo in your local system.
   2. Open the local folder in your code editor. (For example: VSCode)
   3. Open the terminal in your code editor, type the command `cd database`
