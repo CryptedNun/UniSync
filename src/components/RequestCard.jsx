@@ -1,7 +1,7 @@
 function RequestCard({ request, currentUser, onJoin, onLeave, onDelete, onComplete }) {
   const username = currentUser?.username || null;
-  const joined = request.participants?.some((p) => p.user_id === username);
-  const isOwner = request.owner === username;
+  const joined = !!request.joined;
+  const isOwner = !!request.isOwner;
 
   if (request.completed) return null;
 
@@ -9,7 +9,13 @@ function RequestCard({ request, currentUser, onJoin, onLeave, onDelete, onComple
     <div className="card">
       <h3>{request.caption}</h3>
       <div style={{ whiteSpace: 'pre-wrap', opacity: 0.95 }}>{request.description}</div>
-      <p>{(request.participants?.length || 0)} / {request.max_participants} joined</p>
+      <p>{(request.participants_count || 0)} / {request.max_participants} joined</p>
+
+      {(request.participants || []).length > 0 ? (
+        <div style={{ marginTop: 8, fontSize: 13, color: '#cbd5f5' }}>
+          <strong>Participants:</strong> {(request.participants || []).map(p => p.user_id).filter(Boolean).join(', ')}
+        </div>
+      ) : null}
 
       {!joined && (request.participants?.length || 0) < request.max_participants ? (
         <button className="join-btn" onClick={() => onJoin && onJoin(request.id)}>

@@ -35,6 +35,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const user = getUserFromToken(req)
   if (!user) return res.status(401).json({ error: "Unauthorized" })
+  if (!user.canAddNotices) return res.status(403).json({ error: "FORBIDDEN" })
   const { caption, description } = req.body || {}
   if (!caption) return res.status(400).json({ error: "MISSING" })
   const notices = readFile()

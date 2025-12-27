@@ -21,17 +21,20 @@ function getUserFromToken(req) {
 }
 
 function sanitizeRequest(r, username) {
+  const isOwner = username ? r.owner === username : false
+  const participantsArray = r.participants || []
   return {
     id: r.id,
     owner: r.owner,
     caption: r.caption,
     description: r.description,
     max_participants: r.max_participants,
-    participants_count: (r.participants || []).length,
-    participants: (r.participants || []).map(p => ({ user_id: p.user_id })),
+    participants_count: participantsArray.length,
+    // Everyone can see participant usernames
+    participants: participantsArray.map(p => ({ user_id: p.user_id })),
     completed: !!r.completed,
-    joined: username ? !!(r.participants || []).some(p => p.user_id === username) : false,
-    isOwner: username ? r.owner === username : false,
+    joined: username ? participantsArray.some(p => p.user_id === username) : false,
+    isOwner,
   }
 }
 

@@ -15,9 +15,9 @@ function App() {
   const [auth, setAuth] = useState(() => {
     try {
       const raw = localStorage.getItem("auth")
-      return raw ? JSON.parse(raw) : { username: null, token: null, roll: null }
+      return raw ? JSON.parse(raw) : { username: null, token: null, roll: null, canAddNotices: false }
     } catch (e) {
-      return { username: null, token: null, roll: null }
+      return { username: null, token: null, roll: null, canAddNotices: false }
     }
   })
 
@@ -167,7 +167,7 @@ function App() {
       })
       const data = await res.json()
       if (!res.ok) throw data
-      setAuth({ username: data.username, token: data.token, roll: data.roll })
+      setAuth({ username: data.username, token: data.token, roll: data.roll, canAddNotices: !!data.canAddNotices })
       return { ok: true }
     } catch (e) {
       return { ok: false, error: e }
@@ -183,14 +183,14 @@ function App() {
       })
       const data = await res.json()
       if (!res.ok) throw data
-      setAuth({ username: data.username, token: data.token, roll: data.roll })
+      setAuth({ username: data.username, token: data.token, roll: data.roll, canAddNotices: !!data.canAddNotices })
       return { ok: true }
     } catch (e) {
       return { ok: false, error: e }
     }
   }
 
-  const signOut = () => setAuth({ username: null, token: null, roll: null })
+  const signOut = () => setAuth({ username: null, token: null, roll: null, canAddNotices: false })
 
   const Protected = ({ children }) => {
     return auth && auth.username ? children : <Navigate to="/signin" replace />
