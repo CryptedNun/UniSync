@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devStart": "nodemon server"
+    "devStart": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +13,7 @@
   "type": "commonjs",
   "dependencies": {
     "cors": "^2.8.5",
+    "cron": "^4.4.0",
     "express": "^5.2.1",
     "node-cron": "^4.2.1"
   },

@@ -147,7 +147,7 @@ function RequestsActivities({ currentUser }) {
           <label>Caption</label>
           <input type="text" value={newCaption} onChange={(e) => setNewCaption(e.target.value)} />
           <label>Description</label>
-          <input type="text" value={newDescription} onChange={(e) => setNewDescription(e.target.value)} />
+          <textarea value={newDescription} onChange={(e) => setNewDescription(e.target.value)} style={{ width: '100%', padding: 10, minHeight: 80, borderRadius: 8, border: '1px solid #1e293b', backgroundColor: '#0f172a', color: '#e5e7eb', resize: 'none' }} />
           <label>Max Participants</label>
           <input type="number" value={newMax} min={1} onChange={(e) => setNewMax(e.target.value)} />
           <div style={{ marginTop: 12 }}>

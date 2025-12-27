@@ -1,12 +1,50 @@
 [
   {
-    "id": 1766773355062,
-    "title": "Gay shit",
+    "id": 1766729654115,
+    "title": "dummy2",
+    "description": "s",
+    "time": "01:01",
+    "repeat": "Daily",
+    "days": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "user": "Cacodyl"
+  },
+  {
+    "id": 1766771280153,
+    "title": "Math 143",
     "description": "",
-    "time": "00:23",
-    "repeat": "Once",
-    "days": [],
-    "user": "Tahmid",
-    "lastRun": "Sat Dec 27 2025"
+    "time": "10:00",
+    "repeat": "Sun, Mon, Fri, Sat",
+    "days": [
+      "Sun",
+      "Mon",
+      "Fri",
+      "Sat"
+    ],
+    "user": "TestCase ID"
+  },
+  {
+    "id": 1766822255266,
+    "title": "❗Finish CSE106 Offline-1",
+    "description": "Link ADT implementation, using both arrays and DLL.",
+    "time": "18:00",
+    "repeat": "Daily",
+    "days": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "user": "CryptedNun"
   }
 ]

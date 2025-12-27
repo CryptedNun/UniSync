@@ -45,7 +45,6 @@ function Dashboard() {
         >
           Notices
         </button>
-        
         <Pomodoro />
       </div>
     </div>

@@ -5,12 +5,13 @@ function SignIn({ signIn, signUp }) {
   const [mode, setMode] = useState("signin")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [roll, setRoll] = useState("")
   const navigate = useNavigate()
 
   const submit = async () => {
-    if (!username || !password) return alert("Enter username and password")
+    if (!username || !password || !roll) return alert("Enter username, password and roll")
     const fn = mode === "signin" ? signIn : signUp
-    const res = await fn(username, password)
+    const res = await fn(username, password, roll)
     if (res.ok) {
       navigate("/myreminders")
     } else {
@@ -27,6 +28,9 @@ function SignIn({ signIn, signUp }) {
 
       <label>Password</label>
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+      <label>Roll</label>
+      <input type="text" value={roll} onChange={(e) => setRoll(e.target.value)} />
 
       <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
         <button className="save-btn" onClick={submit}>{mode === "signin" ? "Sign In" : "Sign Up"}</button>

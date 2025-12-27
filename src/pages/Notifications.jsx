@@ -1,26 +1,30 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
+function Notifications({ notifications = [], setNotifications, markRead, deleteNotification }) {
+  const navigate = useNavigate();
 
-function Notifications({ notifications, setNotifications, markRead, deleteNotification,  }) {
-  // POLL FOR NEW DATA
+  // Optional polling: only run if a setter is provided by the parent
   useEffect(() => {
+    if (!setNotifications) return;
+    let mounted = true;
     const fetchNotifications = async () => {
       try {
-        const token = localStorage.getItem("token"); // Assuming you store token here
+        const rawAuth = localStorage.getItem("auth");
+        const token = rawAuth ? (JSON.parse(rawAuth).token || null) : localStorage.getItem("token");
         const res = await fetch("http://localhost:3000/api/notifications", {
-            headers: { Authorization: `Bearer ${token}` }
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
         if (res.ok) {
-            const data = await res.json();
-           // In a real app, compare if data is different before setting to avoid re-renders
-            setNotifications(data); 
+          const data = await res.json();
+          if (mounted) setNotifications(data);
         }
       } catch (err) {
         console.error("Polling error", err);
       }
     };
 
-    // Check every 5 seconds
+    fetchNotifications();
     const interval = setInterval(fetchNotifications, 5000);
 
     // Cleanup when leaving page
@@ -35,7 +39,7 @@ function Notifications({ notifications, setNotifications, markRead, deleteNotifi
       </div>
 
       <section>
-        {notifications.length === 0 && (
+        {(!notifications || notifications.length === 0) && (
           <p style={{ color: "#94a3b8" }}>No notifications</p>
         )}
 
@@ -46,12 +50,10 @@ function Notifications({ notifications, setNotifications, markRead, deleteNotifi
             style={{
               width: "100%",
               opacity: note.read ? 0.6 : 1,
-              borderLeft: note.read
-                ? "4px solid #94a3b8"
-                : "4px solid #3b82f6",
+              borderLeft: note.read ? "4px solid #94a3b8" : "4px solid #3b82f6",
             }}
           >
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
               <h3>{note.title}</h3>
               <span style={{ fontSize: 13, color: "#94a3b8" }}>
                 {note.time}
@@ -61,14 +63,16 @@ function Notifications({ notifications, setNotifications, markRead, deleteNotifi
             <p>{note.message}</p>
 
             <div style={{ marginTop: 10, display: "flex", gap: 10 }}>
-              {!note.read && (
+              {!note.read && markRead && (
                 <button className="add-btn" onClick={() => markRead(note.id)}>
                   Mark as read
                 </button>
               )}
-              <button className="add-btn" onClick={() => deleteNotification(note.id)}>
-                Delete
-              </button>
+              {deleteNotification && (
+                <button className="add-btn" onClick={() => deleteNotification(note.id)}>
+                  Delete
+                </button>
+              )}
             </div>
           </div>
         ))}
@@ -77,4 +81,4 @@ function Notifications({ notifications, setNotifications, markRead, deleteNotifi
   )
 }
 
-export default Notifications
+export default Notifications;

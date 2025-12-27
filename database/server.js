@@ -94,12 +94,14 @@ const notificationsRoute = require(path.join(__dirname, "routes", "notifications
 const authRoute = require(path.join(__dirname, "routes", "auth"));
 const requestsRoute = require(path.join(__dirname, "routes", "requests"));
 const teamsRoute = require(path.join(__dirname, "routes", "teams"));
+const noticesRoute = require(path.join(__dirname, "routes", "notices"));
 
 app.use("/api/reminders", remindersRoute);
 app.use("/api/notifications", notificationsRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/requests", requestsRoute);
 app.use("/api/teams", teamsRoute);
+app.use("/api/notices", noticesRoute);
 
 app.listen(PORT, () => {
     console.log(`Backend running on http://localhost:${PORT}`);
