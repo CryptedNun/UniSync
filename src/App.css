@@ -17,6 +17,48 @@
   border-bottom: 1px solid #1e293b;
 }
 
+/* Notification toasts */
+.notification-toast-container {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9999;
+}
+.notification-toast {
+  background: #0f172a;
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  min-width: 260px;
+}
+.notification-toast .nt-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.notification-toast .nt-message {
+  font-size: 13px;
+  opacity: 0.95;
+}
+.notification-toast .nt-actions {
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+  justify-content:flex-end;
+}
+.notification-toast .nt-btn {
+  background: transparent;
+  color: #9ca3af;
+  border: none;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+}
+.notification-toast .nt-btn:hover { color: #fff; }
+.notification-toast .nt-delete { color: #fca5a5; }
 .logo {
   font-size: 22px;
   font-weight: bold;

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/Dashboard";
@@ -9,20 +9,22 @@ import MyTeams from "./pages/MyTeams";
 import AddReminder from "./pages/AddReminder";
 import Notifications from "./pages/Notifications";
 import SignIn from "./pages/SignIn";
+import NotificationToast from "./components/NotificationToast";
 import "./App.css";
 
 function App() {
   const [auth, setAuth] = useState(() => {
     try {
       const raw = localStorage.getItem("auth")
-      return raw ? JSON.parse(raw) : { username: null, token: null, roll: null }
+      return raw ? JSON.parse(raw) : { username: null, token: null }
     } catch (e) {
-      return { username: null, token: null, roll: null }
+      return { username: null, token: null }
     }
   })
 
   const [reminders, setReminders] = useState([])
   const [notifications, setNotifications] = useState([])
+  const firedRemindersRef = useRef(new Set())
 
   // Load reminders from backend (fallback to localStorage)
   useEffect(() => {
@@ -74,6 +76,41 @@ function App() {
       .catch(() => {})
   }, [auth])
 
+  // Check reminders every minute and trigger notifications when time matches
+  useEffect(() => {
+    if (reminders.length === 0) return
+
+    const checkReminders = () => {
+      const now = new Date()
+      const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`
+      const today = now.toDateString()
+      
+      reminders.forEach((reminder) => {
+        // Check if reminder time matches current time
+        if (reminder.time === currentTime) {
+          const key = `${reminder.id}-${today}`
+          
+          // Only fire if we haven't already fired this reminder today
+          if (!firedRemindersRef.current.has(key)) {
+            firedRemindersRef.current.add(key)
+            addNotification({
+              id: Date.now(),
+              title: reminder.title,
+              message: reminder.description || "Time for your reminder",
+              time: "Just now",
+            })
+          }
+        }
+      })
+    }
+
+    // Check immediately
+    checkReminders()
+
+    // Check every minute
+    const interval = setInterval(checkReminders, 60000)
+    return () => clearInterval(interval)
+  }, [reminders])
 
   useEffect(() => {
     try {
@@ -158,39 +195,39 @@ function App() {
 
 
 
-  const signUp = async (username, password, roll) => {
+  const signUp = async (username, password) => {
     try {
       const res = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password, roll }),
+        body: JSON.stringify({ username, password }),
       })
       const data = await res.json()
       if (!res.ok) throw data
-      setAuth({ username: data.username, token: data.token, roll: data.roll })
+      setAuth({ username: data.username, token: data.token })
       return { ok: true }
     } catch (e) {
       return { ok: false, error: e }
     }
   }
 
-  const signIn = async (username, password, roll) => {
+  const signIn = async (username, password) => {
     try {
       const res = await fetch("http://localhost:3000/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password, roll }),
+        body: JSON.stringify({ username, password }),
       })
       const data = await res.json()
       if (!res.ok) throw data
-      setAuth({ username: data.username, token: data.token, roll: data.roll })
+      setAuth({ username: data.username, token: data.token })
       return { ok: true }
     } catch (e) {
       return { ok: false, error: e }
     }
   }
 
-  const signOut = () => setAuth({ username: null, token: null, roll: null })
+  const signOut = () => setAuth({ username: null, token: null })
 
   const Protected = ({ children }) => {
     return auth && auth.username ? children : <Navigate to="/signin" replace />
@@ -198,11 +235,12 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar currentUser={auth} onSignOut={signOut} />
+      <Navbar currentUser={auth.username} onSignOut={signOut} />
+      <NotificationToast notifications={notifications} markRead={markNotificationRead} deleteNotification={deleteNotification} />
       <Routes>
         <Route path="/" element={<Protected><Dashboard /></Protected>} />
         <Route path="/requests" element={<Protected><RequestsActivities currentUser={auth} /></Protected>} />
-        <Route path="/notices" element={<Protected><Notices currentUser={auth} /></Protected>} />
+        <Route path="/notices" element={<Protected><Notices /></Protected>} />
         <Route path="/myreminders" element={<Protected><MyReminders reminders={reminders} removeReminder={deleteReminder} /></Protected>} />
         <Route path="/myteams" element={<Protected><MyTeams currentUser={auth} /></Protected>} />
         <Route path="/add-reminder" element={<Protected><AddReminder addReminder={addReminder} /></Protected>} />

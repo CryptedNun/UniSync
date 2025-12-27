@@ -3,27 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Pomodoro from "../components/Pomodoro";
 import "./Dashboard.css";
 
-const dummyRequests = [
-  {
-    id: 1,
-    caption: "Tuition Offer",
-    description: "Need 1 student to tutor Math 10",
-    max_participants: 2,
-    participants: [{ user_id: 1 }],
-  },
-  {
-    id: 2,
-    caption: "Weekend Trip",
-    description: "Looking for 3 friends for hiking",
-    max_participants: 4,
-    participants: [{ user_id: 2 }],
-  },
-];
-
-const dummyNotices = [
-  { id: 1, content: "📢 Semester Ends on Dec 30" },
-  { id: 2, content: "📢 Hackathon Registration closes tonight" },
-];
 
 function Dashboard() {
   const navigate = useNavigate()

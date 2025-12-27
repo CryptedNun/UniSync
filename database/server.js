@@ -63,23 +63,23 @@ cron.schedule('* * * * *', () => {
 
 		console.log(`Checking [${reminder.title}]: DayMatch: ${isToday}, TimeMatch: ${isTime}, NotFired: ${notFiredYet}`);
 
-		if (isToday && isTime && notFiredYet) {
-			console.log(`✅ TRIGGERING: ${reminder.title}`);
+		// if (isToday && isTime && notFiredYet) {
+		// 	console.log(`✅ TRIGGERING: ${reminder.title}`);
 			
-			const newNotification = {
-				id: Date.now().toString() + Math.random().toString(36).substr(2, 5),
-				user: reminder.user,
-				title: reminder.title,
-				message: reminder.description || `It is time for ${reminder.title}`,
-				time: convertTo12HourFormat(currentTime),
-				read: false,
-				createdAt: new Date().toISOString()
-			};
+		// 	const newNotification = {
+		// 		id: Date.now().toString() + Math.random().toString(36).substr(2, 5),
+		// 		user: reminder.user,
+		// 		title: reminder.title,
+		// 		message: reminder.description || `It is time for ${reminder.title}`,
+		// 		time: convertTo12HourFormat(currentTime),
+		// 		read: false,
+		// 		createdAt: new Date().toISOString()
+		// 	};
 
-			notifications.push(newNotification);
-			reminder.lastRun = todayDate;
-			hasChanged = true;
-		}
+		// 	notifications.push(newNotification);
+		// 	reminder.lastRun = todayDate;
+		// 	hasChanged = true;
+		// }
 	});
 
     if (hasChanged) {

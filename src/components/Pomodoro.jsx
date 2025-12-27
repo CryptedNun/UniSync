@@ -4,7 +4,7 @@ import "./Pomodoro.css";
 const WORK_SEC = 25 * 60;
 const BREAK_SEC = 5 * 60;
 
-export default function Pomodoro() {
+function Pomodoro() {
   const [visible, setVisible] = useState(false);
   const [running, setRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
@@ -106,7 +106,7 @@ export default function Pomodoro() {
         rafRef.current = null;
       }
     };
-  }, [running, isBreak]);
+  }, [running]);
 
   function togglePanel() {
     const opening = !visible;
@@ -116,6 +116,8 @@ export default function Pomodoro() {
       setSecondsLeft(WORK_SEC);
       setTotalWorkSec((t) => t); // no-op to keep state hook stable
       setRunning(true);
+    } else {
+      setRunning(false);
     }
   }
 
@@ -165,3 +167,5 @@ export default function Pomodoro() {
     </div>
   );
 }
+
+export default React.memo(Pomodoro);

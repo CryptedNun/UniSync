@@ -81,4 +81,4 @@ function Notifications({ notifications = [], setNotifications, markRead, deleteN
   )
 }
 
-export default Notifications;
+export default Notifications
