@@ -50,7 +50,9 @@ function Notices({ currentUser }) {
 
       <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
         <h1 style={{ margin: 0 }}>Notices</h1>
-        <button className="add-btn" onClick={openForm}>＋</button>
+        {currentUser?.canAddNotices ? (
+          <button className="add-btn" onClick={openForm}>＋</button>
+        ) : null}
       </div>
 
       <div className="cards" style={{ marginTop: 16 }}>

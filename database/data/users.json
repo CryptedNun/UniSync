@@ -2,37 +2,57 @@
   {
     "username": "CryptedNun",
     "password": "ungabunga",
-    "token": "373785284c631b6f028bb7541554f2848c13e9aee24983ff",
-    "roll": "1001"
+    "token": "47515811991b69b86055448efa0f259effbe2df74efa8bde",
+    "roll": "1001",
+    "canAddNotices": true
   },
   {
     "username": "Cacodyl",
     "password": "ungabunga",
-    "token": "fc85631114c2fb96172f29b0b216e0f5fe56bdcb2393d796",
-    "roll": "1002"
+    "token": "a1a29b61b5aab8eba383f15ce41f8185f27818aa787b3632",
+    "roll": "1002",
+    "canAddNotices": true
   },
   {
     "username": "Tahmid",
     "password": "amd123123",
     "token": "406abc576b842afca4b93f1fa1cd959661a367147301d467",
-    "roll": "1003"
+    "roll": "1003",
+    "canAddNotices": true
   },
   {
     "username": "TestUser",
     "password": "testpass",
     "token": "testtoken1234567890",
-    "roll": "001"
+    "roll": "001",
+    "canAddNotices": true
   },
   {
     "username": "TestCase ID",
     "password": "1234",
     "token": "44474ca7f81e99e638f66a91285a942ad97d33a154ec330c",
-    "roll": "005"
+    "roll": "005",
+    "canAddNotices": true
   },
   {
     "username": "CryptedNun2",
     "password": "ungabunga",
     "roll": "088",
-    "token": "dcce09633f2ff0c8bd461e9fb5de4de134121bd3ef4b9143"
+    "token": "ea76a2ccc5e944b7172349a1c1f55beb93a4222ca47c5291",
+    "canAddNotices": true
+  },
+  {
+    "username": "CryptedNun3",
+    "password": "ungabunga",
+    "roll": "0888",
+    "token": "1c69470c9aebd84125e6eb7d861acc54835dd53995c4b5b4",
+    "canAddNotices": true
+  },
+  {
+    "username": "CryptedNun4",
+    "password": "ungabunga",
+    "roll": "0888",
+    "token": "25ef8f7bdc9a4ed69e2cca5d6ff109fb0fb0f9d51d5d7d28",
+    "canAddNotices": false
   }
 ]

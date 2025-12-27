@@ -4,7 +4,7 @@ import Pomodoro from "../components/Pomodoro";
 import "./Dashboard.css";
 
 
-function Dashboard() {
+function Dashboard({ currentUser }) {
   const navigate = useNavigate()
   return (
     <div className="dashboard">
@@ -24,7 +24,7 @@ function Dashboard() {
         >
           Notices
         </button>
-        <Pomodoro />
+        <Pomodoro currentUser={currentUser} />
       </div>
     </div>
   )

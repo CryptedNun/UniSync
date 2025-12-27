@@ -29,10 +29,13 @@ router.post("/signup", (req, res) => {
   if (!username || !password || !roll) return res.status(400).json({ error: "MISSING" })
   const users = readUsers()
   if (users.find((u) => u.username === username)) return res.status(400).json({ error: "USERNAME_TAKEN" })
+  // prevent duplicate roll numbers
+  if (users.find((u) => String(u.roll) === String(roll))) return res.status(400).json({ error: "DUPLICATE_ROLL" })
   const token = genToken()
-  users.push({ username, password, roll, token })
+  // new users do NOT get notice-adding permission by default
+  users.push({ username, password, roll, token, canAddNotices: false })
   writeUsers(users)
-  res.json({ username, roll, token })
+  res.json({ username, roll, token, canAddNotices: false })
 })
 
 // Signin: expects { username, password, roll }
@@ -45,7 +48,7 @@ router.post("/signin", (req, res) => {
   // generate a new token for this session
   user.token = genToken()
   writeUsers(users)
-  res.json({ username: user.username, roll: user.roll, token: user.token })
+  res.json({ username: user.username, roll: user.roll, token: user.token, canAddNotices: !!user.canAddNotices })
 })
 
 // simple helper to get user from token
@@ -56,7 +59,7 @@ router.get("/whoami", (req, res) => {
   const users = readUsers()
   const user = users.find((u) => u.token === token)
   if (!user) return res.json({ username: null })
-  res.json({ username: user.username, roll: user.roll })
+  res.json({ username: user.username, roll: user.roll, canAddNotices: !!user.canAddNotices })
 })
 
 module.exports = router

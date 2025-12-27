@@ -40,7 +40,8 @@ function RequestsActivities({ currentUser }) {
       const res = await fetch(`${API}/requests/${requestId}/join`, { method: 'POST', headers })
       if (!res.ok) throw new Error('join-failed')
       const data = await res.json()
-      const next = requests.map(r => r.id === data.id ? { ...r, participants: r.participants ? [...r.participants, { user_id: currentUser.username }] : [{ user_id: currentUser.username }] } : r)
+      // use server-sanitized response to keep flags like `joined` and `participants_count` in sync
+      const next = requests.map(r => r.id === data.id ? { ...r, ...data } : r)
       persistToLocal(next)
     } catch (e) {
       // fallback local
@@ -51,7 +52,7 @@ function RequestsActivities({ currentUser }) {
         const count = (r.participants || []).length;
         if (count >= r.max_participants) return r;
         const participants = [...(r.participants || []), { user_id: currentUser.username }];
-        return { ...r, participants };
+        return { ...r, participants, joined: true, participants_count: (r.participants_count || (r.participants || []).length) + 1 };
       });
       persistToLocal(next)
     }
@@ -64,13 +65,14 @@ function RequestsActivities({ currentUser }) {
       const res = await fetch(`${API}/requests/${requestId}/leave`, { method: 'POST', headers })
       if (!res.ok) throw new Error('leave-failed')
       const data = await res.json()
-      const next = requests.map(r => r.id === data.id ? { ...r, participants: (r.participants || []).filter(p => p.user_id !== currentUser.username) } : r)
+      // use server response to keep flags consistent
+      const next = requests.map(r => r.id === data.id ? { ...r, ...data } : r)
       persistToLocal(next)
     } catch (e) {
       const next = requests.map((r) => {
         if (r.id !== requestId) return r;
         const participants = (r.participants || []).filter(p => p.user_id !== currentUser.username);
-        return { ...r, participants };
+        return { ...r, participants, joined: false, participants_count: Math.max(0, (r.participants_count || (r.participants || []).length) - 1) };
       });
       persistToLocal(next)
     }

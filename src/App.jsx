@@ -16,9 +16,9 @@ function App() {
   const [auth, setAuth] = useState(() => {
     try {
       const raw = localStorage.getItem("auth")
-      return raw ? JSON.parse(raw) : { username: null, token: null }
+      return raw ? JSON.parse(raw) : { username: null, token: null, roll: null, canAddNotices: false }
     } catch (e) {
-      return { username: null, token: null }
+      return { username: null, token: null, roll: null, canAddNotices: false }
     }
   })
 
@@ -204,7 +204,7 @@ function App() {
       })
       const data = await res.json()
       if (!res.ok) throw data
-      setAuth({ username: data.username, token: data.token })
+      setAuth({ username: data.username, token: data.token, roll: data.roll, canAddNotices: !!data.canAddNotices })
       return { ok: true }
     } catch (e) {
       return { ok: false, error: e }
@@ -220,14 +220,14 @@ function App() {
       })
       const data = await res.json()
       if (!res.ok) throw data
-      setAuth({ username: data.username, token: data.token })
+      setAuth({ username: data.username, token: data.token, roll: data.roll, canAddNotices: !!data.canAddNotices })
       return { ok: true }
     } catch (e) {
       return { ok: false, error: e }
     }
   }
 
-  const signOut = () => setAuth({ username: null, token: null })
+  const signOut = () => setAuth({ username: null, token: null, roll: null, canAddNotices: false })
 
   const Protected = ({ children }) => {
     return auth && auth.username ? children : <Navigate to="/signin" replace />
@@ -238,7 +238,7 @@ function App() {
       <Navbar currentUser={auth.username} onSignOut={signOut} />
       <NotificationToast notifications={notifications} markRead={markNotificationRead} deleteNotification={deleteNotification} />
       <Routes>
-        <Route path="/" element={<Protected><Dashboard /></Protected>} />
+        <Route path="/" element={<Protected><Dashboard currentUser={auth} /></Protected>} />
         <Route path="/requests" element={<Protected><RequestsActivities currentUser={auth} /></Protected>} />
         <Route path="/notices" element={<Protected><Notices /></Protected>} />
         <Route path="/myreminders" element={<Protected><MyReminders reminders={reminders} removeReminder={deleteReminder} /></Protected>} />

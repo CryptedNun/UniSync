@@ -67,6 +67,16 @@ function Pomodoro() {
         if (elapsedWorkMs >= 1000) {
           const add = Math.floor(elapsedWorkMs / 1000);
           setTotalWorkSec((t) => t + add);
+          // send increment to backend for each add (batched as add seconds)
+          if (currentUser && currentUser.token) {
+            try {
+              fetch('http://localhost:3000/api/pomodoro/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${currentUser.token}` },
+                body: JSON.stringify({ seconds: add }),
+              }).catch(() => {})
+            } catch (e) {}
+          }
           lastWorkUpdateRef.current = lastWorkUpdateRef.current + add * 1000;
         }
       }
@@ -107,6 +117,18 @@ function Pomodoro() {
       }
     };
   }, [running]);
+
+  // load today's total from server on mount (if logged in)
+  useEffect(() => {
+    let mounted = true
+    if (currentUser && currentUser.token) {
+      fetch('http://localhost:3000/api/pomodoro/', { headers: { Authorization: `Bearer ${currentUser.token}` } })
+        .then(r => r.json())
+        .then(data => { if (mounted && data && typeof data.totalSeconds === 'number') setTotalWorkSec(data.totalSeconds) })
+        .catch(() => {})
+    }
+    return () => { mounted = false }
+  }, [currentUser])
 
   function togglePanel() {
     const opening = !visible;

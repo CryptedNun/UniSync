@@ -1,22 +1,5 @@
 [
   {
-    "id": 1766729654115,
-    "title": "dummy2",
-    "description": "s",
-    "time": "01:01",
-    "repeat": "Daily",
-    "days": [
-      "Sun",
-      "Mon",
-      "Tue",
-      "Wed",
-      "Thu",
-      "Fri",
-      "Sat"
-    ],
-    "user": "Cacodyl"
-  },
-  {
     "id": 1766771280153,
     "title": "Math 143",
     "description": "",
@@ -46,5 +29,31 @@
       "Sat"
     ],
     "user": "CryptedNun"
+  },
+  {
+    "id": 1766840619509,
+    "title": "ME174 Drawing Assignment",
+    "description": "",
+    "time": "18:00",
+    "repeat": "Once",
+    "days": [],
+    "user": "Cacodyl"
+  },
+  {
+    "id": 1766840667190,
+    "title": "CSE106 Offline-1",
+    "description": "Reminder until completion.",
+    "time": "19:00",
+    "repeat": "Daily",
+    "days": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
+    "user": "Cacodyl"
   }
 ]
