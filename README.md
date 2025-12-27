@@ -1,16 +1,20 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+● Project Title: UniSync
+● Features List: 
+  1. Live Notice Board
+  2. Live Requests and Activity Board
+  3. Notifies the user of newly added notices and requests. 
+● Installation Instructions:
+  1. Download the repo in your local system.
+  2. Open the local folder in your code editor. (For example: VSCode)
+  3. Open the terminal in your code editor, type the command `cd database`
+  4. Type command `npm install express`
+  5. Type command `npm install -D nodemon`
+  6. Type command `npm install express cors`
+  7. Type command `npm run devStart`, this starts the local backend server.
+  8. Go back on the terminal, using command `cd ..`
+  9. Type `npm install vite`
+  10. Type `npm run dev`
+  11. Now go to the localhost port on your browser using the link gotten from the previous command. This runs the frontend.
+● Team Credits:
+  1. Tahmid bin Rouf: Front and backend implementation of Notifications, Reminders and frontend of notices, teams.
+  2. Md. Hasan Mahmud: Front and backend implementation of Pomodoro, Activity page and backend of notices, teams. Dashboard UI.
