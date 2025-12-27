@@ -4,7 +4,7 @@ import "./Pomodoro.css";
 const WORK_SEC = 25 * 60;
 const BREAK_SEC = 5 * 60;
 
-function Pomodoro() {
+export default function Pomodoro({ currentUser }) {
   const [visible, setVisible] = useState(false);
   const [running, setRunning] = useState(false);
   const [isBreak, setIsBreak] = useState(false);
@@ -190,4 +190,4 @@ function Pomodoro() {
   );
 }
 
-export default React.memo(Pomodoro);
+// export default React.memo(Pomodoro);

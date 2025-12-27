@@ -195,12 +195,12 @@ function App() {
 
 
 
-  const signUp = async (username, password) => {
+  const signUp = async (username, password, roll) => {
     try {
       const res = await fetch("http://localhost:3000/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, roll }),
       })
       const data = await res.json()
       if (!res.ok) throw data
@@ -211,12 +211,12 @@ function App() {
     }
   }
 
-  const signIn = async (username, password) => {
+  const signIn = async (username, password, roll) => {
     try {
       const res = await fetch("http://localhost:3000/api/auth/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password, roll }),
       })
       const data = await res.json()
       if (!res.ok) throw data
