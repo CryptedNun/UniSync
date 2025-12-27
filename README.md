@@ -13,7 +13,7 @@
   5. Type command `npm install -D nodemon`
   6. Type command `npm install express cors`
   7. Type command `npm run devStart`, this starts the local backend server.
-  8. Go back on the terminal, using command `cd ..`
+  8. Go back to the root of the folder on the terminal, using command `cd ..`, or just open new terminal on your code editor.
   9. Type `npm install vite`
   10. Type `npm run dev`
   11. Now go to the localhost port on your browser using the link gotten from the previous command. This runs the frontend.
